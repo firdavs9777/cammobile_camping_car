@@ -1,0 +1,211 @@
+<template>
+  <div class="sidebar" :class="active">
+    <div class="sidebar-panel">
+      <div class="profile_main">
+        <div class="profile">
+          <span class="divider"></span>
+          <button @click="closeHandler">
+            <i class="ri-close-line"></i>
+          </button>
+        </div>
+        <v-avatar>
+          <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" class="user_image" />
+        </v-avatar>
+        <span class="user_name"><h1>Mister Johnson</h1></span>
+        <p>Please login first</p>
+        <br>
+        <button class="login"  @click="closeHandler" >
+          <router-link to="/login">
+            Login
+          </router-link>
+        </button>
+    
+
+      </div>
+      <slot>
+        <ul>
+          <li @click="closeHandler">
+            <router-link to="/myprofile"> 마이 페이지 </router-link>
+          </li>
+          <hr class="line" />
+          <li @click="closeHandler">
+            <router-link to="/solditems"> 판매 내역 </router-link>
+          </li>
+          <hr class="line" />
+
+          <li @click="closeHandler">
+            <router-link to="/purchasedproducts"> 구매 내역 </router-link>
+          </li>
+
+          <hr class="line" />
+          <li @click="closeHandler">
+            <router-link to="/wishlist"> 찜 내역 </router-link>
+          </li>
+          <hr class="line" />
+          <li @click="closeHandler">
+            <router-link to="/recentviews"> 최근 본 내역 </router-link>
+          </li>
+          <hr class="line" />
+          <li @click="closeHandler">
+            <router-link to="/customerservice"> 고객 센터 </router-link>
+          </li>
+          <hr class="line" />
+        </ul>
+      </slot>
+      <!-- {{ String( menubarOpenBln ) }} -->
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  props: {
+    menubarOpenBln: Boolean,
+    closeHandler: Function,
+  },
+  data: () => ({
+    isPanelOpen: true,
+    active: null,
+  }),
+  watch: {
+    menubarOpenBln() {
+      console.log("//////", this.menubarOpenBln);
+      this.active = this.menubarOpenBln ? "active" : null;
+    },
+  },
+  methods: {
+    closeSidebarPanel() {
+      this.isPanelOpen = false;
+    },
+  },
+  mounted: () => {
+    // document.querySelector(".sidebar").setAttribute("class", "sidebar show");
+  },
+};
+</script>
+<style scoped>
+.sidebar {
+  background: rgba(0, 0, 0, 0.3);
+  width: 420px;
+  z-index: 1000;
+  overflow-x: hidden;
+  transition: all 0.2s ease 0.1s;
+  left: -100%;
+  top: 0;
+  height: 100%;
+  position: absolute;
+}
+.sidebar.active {
+  left: 0%;
+}
+.sidebar::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: #f8f8fd80;
+}
+.sidebar.show {
+  opacity: 1;
+}
+
+.sidebar.show .sidebar-panel {
+  transform: translateX(0%);
+}
+
+.sidebar-panel {
+  overflow-y: auto;
+  /* background-color: #aaa7c9; */
+  /* position: fixed; */
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  z-index: 999;
+  width: 80%;
+  transition: all 0.2s ease 0.1s;
+  background: #ddf4fa;
+  color: #333;
+  justify-content: flex;
+  flex-direction: row;
+  /* width: calc( var( --width ) - 10% ); */
+}
+.profile_main {
+  background-color: #ddf4fa;
+  height: 20vh;
+  display: flex-box;
+  flex-direction: row;
+}
+.profile {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.user_name h1
+{
+  display: inline;
+  padding-left: 10px;
+  font-size: 18px;
+}
+.profile_main button 
+{
+  justify-content: flex-end;
+}
+.buttons 
+{
+  justify-content: flex-end;
+}
+.register 
+{
+  padding-left:30px;
+  margin: 10px;
+  justify-self: end;
+  font-size: 20px;
+}
+.login
+{
+  padding-left:30px;
+  margin: 10px;
+  justify-self: end;
+  font-size: 20px;
+}
+ul {
+  height: 100%;
+  background-color: #ffff;
+}
+ul li {
+  height: 60px;
+  padding-top: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #333;
+  font-size: 20px;
+  list-style: none;
+  text-decoration: none;
+}
+a {
+  color: #333;
+  list-style: none;
+  text-decoration: none;
+}
+a:active,
+a:hover,
+a.router-link-active {
+  border-bottom: 1px solid yellow;
+  color: #a0a30a;
+  font-size: 20px;
+  cursor: pointer;
+}
+.line {
+  width: 90%;
+  padding-left: 10px;
+  margin-top: 10px;
+}
+.ri-close-line {
+  font-size: 24px;
+  text-align: end;
+}
+</style>
