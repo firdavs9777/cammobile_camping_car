@@ -4,19 +4,19 @@
       :menuTogglefunc="menuTogglefunc"
     />
     <router-view />
-    <Footer/>
+    <!-- <Footer/> -->
     <MenuBar :menubarOpenBln="menubarOpenBln" :closeHandler="menuTogglefunc" />
   </div>
 </template>
 <script>
 import Navbar from './components/pages/Navbar/Navbar.vue';
-import Footer from './components/pages/Foooter/Footer.vue';
+// import Footer from './components/pages/Foooter/Footer.vue';
 import MenuBar from "./components/pages/MenuBar/MenuBar.vue";
 export default {
   name: "App",
   components: { 
     Navbar , 
-    Footer , 
+    // Footer , 
     MenuBar , 
   } , 
   data () {

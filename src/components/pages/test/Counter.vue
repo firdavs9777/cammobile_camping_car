@@ -38,6 +38,6 @@ export default {
     color:#333;
     background-color: aqua;
     padding: 10px;
-    margin:10px;
+    margin:20px;
 }
 </style>

@@ -1,5 +1,6 @@
 <template> 
-<p>Counter is {{ counter }}</p>
+<!-- It wil take par and active classes-->
+<p class="par">Counter is {{ counter }}</p>
 
 </template>
 <script> 
@@ -15,7 +16,7 @@ export default {
 }
 </script>
 <style scoped>
-p 
+.par
 {
     font-size: 22px;
     margin: 10px;

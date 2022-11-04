@@ -11,23 +11,28 @@
       <input type="password" class="password" placeholder="Password" />
       <br />
       <button type="submit" class="login-button">로그인</button>
+      
       <button type="submit" class="kakao-login">
-        <i class="ri-kakao-talk-fill"></i> 카카오톡 간편 로그인</button>
+        <i class="ri-kakao-talk-fill"></i> 카카오톡 간편 로그인
+      </button>
+      <button type="submit" class="google-login">
+        <i class="ri-google-fill"></i> Google 간편 로그인
+      </button>
 
       <ul>
-            <li>
-                <router-link to="/find_password">비밀번호 찾기</router-link>
-            </li>
-            <li class="divider">
-                |
-            </li>
-            <li>
-                <router-link to="/register">회원가입</router-link>
-            </li>
-        </ul>
+        <li>
+          <router-link to="/find_password">비밀번호 찾기</router-link>
+        </li>
+        <li class="divider">
+          |
+        </li>
+        <li>
+          <router-link to="/register">회원가입</router-link>
+        </li>
+      </ul>
     </form>
     <div class="register">
-       
+
     </div>
   </div>
 </template>
@@ -35,25 +40,29 @@
 <style scoped>
 .login {
   height: auto;
-    background-color: #F5F5F5;
+  background-color: #F5F5F5;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
+
 form {
-  height: 500px;
-width:100%;
+
+  width: 100%;
   padding: 1rem;
 }
+
 .heading {
   font-size: 50px;
   color: #47b5ff;
   padding: 10px;
   margin: 20px;
 }
+
 label {
   font-size: 20px;
 }
+
 .email {
   height: 40px;
   width: 200px;
@@ -62,6 +71,7 @@ label {
   padding-left: 10px;
   border-radius: 10px;
 }
+
 .login-button {
   font-size: 16px;
   height: 40px;
@@ -70,8 +80,8 @@ label {
   border-radius: 20px;
   margin-top: 15px;
 }
-.kakao-login 
-{
+
+.kakao-login {
   color: #333;
   height: 35px;
   width: 200px;
@@ -81,6 +91,16 @@ label {
   font-size: 16px;
 }
 
+.google-login {
+  color: #333;
+  height: 35px;
+  width: 200px;
+  background-color: #81C6E8;
+  border-radius: 20px;
+  margin-top: 10px;
+  font-size: 17px;
+  padding-left: 5px;
+}
 .password {
   width: 200px;
   font: inherit;
@@ -91,18 +111,19 @@ label {
   padding-left: 10px;
   border-radius: 10px;
 }
-ul 
-{
-    justify-content: space-between;
-    margin-top: 10px;
+
+ul {
+  justify-content: space-between;
+  margin-top: 10px;
 }
-li 
-{
-    display: inline-block;
-    padding: 10px;
-    margin-right: 10px;
-    margin-left: 10px;
+
+li {
+  display: inline-block;
+  padding: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
 }
+
 a {
   font-size: 14px;
   text-decoration: none;
@@ -113,11 +134,11 @@ a {
   padding-bottom: 5px;
   border: 1px solid transparent;
 }
+
 a:active,
 a:hover,
 a.router-link-active {
   font-size: 14px;
   cursor: pointer;
 }
-
 </style>

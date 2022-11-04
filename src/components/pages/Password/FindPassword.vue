@@ -24,6 +24,7 @@ export default
         if(this.email != '')
         {
             alert("Please check your email, the link has been sent");
+            this.$router.replace('login');
         }
         else 
         {
@@ -55,17 +56,17 @@ label {
 }
 .email {
   height: 40px;
-  width: 30%;
+  width: 100%;
   border: 1px solid #ccc;
-  margin: 15px;
   padding-left: 10px;
   border-radius: 10px;
 }
 .login-button {
-  height: 40px;
-  width: 30%;
+  height: 45px;
+  width: 100%;
   background-color: #47b5ff;
   border-radius: 20px;
-  margin-top: 15px;
+  margin-top:15px;
+  margin-bottom: 15px;
 }
 </style>

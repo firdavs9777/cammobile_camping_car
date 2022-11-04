@@ -8,19 +8,25 @@
             <i class="ri-close-line"></i>
           </button>
         </div>
-        <v-avatar>
-          <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" class="user_image" />
-        </v-avatar>
-        <span class="user_name"><h1>Mister Johnson</h1></span>
-        <p>Please login first</p>
-        <br>
-        <button class="login"  @click="closeHandler" >
-          <router-link to="/login">
-            Login
-          </router-link>
-        </button>
-    
 
+        <div class="account_registered" v-if="isLogin">
+          <img src="../../assets/avatar.png" alt="Avatar" class="avatar" />
+          <span class="user_name"><h1>Mister Johnson</h1></span>
+          <button class="logout">Logout</button>
+        </div>
+
+        <div v-else>
+          <img src="../../assets/avatar.png" alt="Avatar" class="avatar" />
+
+          <p class="login_first">Please login first</p>
+          <br />
+          <button class="login" @click="closeHandler">
+            <router-link to="/login"> Login </router-link>
+          </button>
+          <button class="register" @click="closeHandler">
+            <router-link to="/register"> Register </router-link>
+          </button>
+        </div>
       </div>
       <slot>
         <ul>
@@ -65,6 +71,7 @@ export default {
   data: () => ({
     isPanelOpen: true,
     active: null,
+    isLogin: false,
   }),
   watch: {
     menubarOpenBln() {
@@ -83,6 +90,12 @@ export default {
 };
 </script>
 <style scoped>
+.avatar {
+  vertical-align: middle;
+  width: 120px;
+  height: 70px;
+  border-radius: 50%;
+}
 .sidebar {
   background: rgba(0, 0, 0, 0.3);
   width: 420px;
@@ -134,7 +147,7 @@ export default {
 }
 .profile_main {
   background-color: #ddf4fa;
-  height: 20vh;
+  height: auto;
   display: flex-box;
   flex-direction: row;
 }
@@ -144,33 +157,57 @@ export default {
   justify-content: space-between;
 }
 
-.user_name h1
-{
+.user_name h1 {
   display: inline;
   padding-left: 10px;
   font-size: 18px;
 }
-.profile_main button 
-{
+.profile_main button {
   justify-content: flex-end;
 }
-.buttons 
-{
+.buttons {
   justify-content: flex-end;
 }
-.register 
-{
-  padding-left:30px;
+.register {
+  padding-left: 30px;
   margin: 10px;
   justify-self: end;
   font-size: 20px;
 }
-.login
+.login_first
 {
-  padding-left:30px;
+  font-size: 16px;
+  padding: 10px;
+  margin: auto;
+  color: rgb(224, 45, 45);
+}
+.login {
+  padding-left: 30px;
   margin: 10px;
   justify-self: end;
   font-size: 20px;
+}
+.register {
+  padding-left: 30px;
+  margin: 10px;
+  justify-self: end;
+  font-size: 20px;
+}
+.account_registered {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+.logout {
+  border: 1px solid #333;
+  font-size: 18px;
+  border-radius: 10px;
+  background-color: #a0a30a;
+  color: #fff;
+  height: 50px;
+  width: 150px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 ul {
   height: 100%;
