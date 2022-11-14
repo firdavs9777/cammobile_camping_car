@@ -75,7 +75,6 @@ export default {
   }),
   watch: {
     menubarOpenBln() {
-      console.log("//////", this.menubarOpenBln);
       this.active = this.menubarOpenBln ? "active" : null;
     },
   },

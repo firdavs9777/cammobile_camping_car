@@ -1,0 +1,299 @@
+$primary: #3e3cc3;
+$platform: #0dbde9;
+$platform-light: rgba(13, 189, 233, 0.3);
+// $platform-dark: ;
+$gnb: #1e1e1e;
+$gnb-active: #1e1e1e;
+$secondary: #5665ff;
+$black: #000;
+$gray-0d: #0d0d0dd9;
+$dark: #242424 !default;
+$light: #f5f8fd;
+$white: #fff;
+$dark-gray: #525462;
+$middle-gray: #808396;
+$light-gray: #e6e8f3;
+$gray-fb: #fafbfc;
+$gray-f5: #f5f5f5;
+$gray-e5: #e5e5e5;
+$gray-6: #666;
+$gray-59: #595959;
+$gray-9: #999;
+$gray-e: #eee;
+$gray-5: #555;
+$gray-4: #444;
+$gray-40: #404040;
+$gray-3: #333;
+$gray-2: #222 !default;
+$gray-d: #ddd; 
+$gray-da: #dadada;
+$gray-ce: #ced4da;
+$gray-b7: #b7c7e2;
+$gray-d5: #d5e5ee;
+$gray-6d: #6d707e;
+$gray-e4: #e4e4e4;
+$gray-faf: #fafbfc !default;
+$light-blue: #2a8dc5;
+$middle-blue: #5790ff;
+$dark-blue: #4879BB;
+$light-orange: #fbebda;
+$yellow: #fae100;
+$transparent: rgba(0, 0, 0, 0);
+// $blue: #2f4aa9 !default;
+// $red: #ec4f4f !default;
+// $green: #73b540 !default;
+// $purple: #905fae !default;
+// $orange: #ee941d !default;
+$blue: #8976fa !default;
+$red: #ec4f4f !default;
+$green: #3ab8a3 !default;
+$purple: #326696 !default;
+$orange: #e99f3f !default;
+
+
+$dim: rgba(
+  $color: #000000,
+  $alpha: 0.2,
+);
+
+$color-material: #9D92C9;
+$color-process : #1F4B81;
+$color-analysis : #67A1E3;
+$color-equipment : #8DC56C;
+$color-protocal : #999;
+$color-measurement : #66B6B7;
+$width: 420px;
+$auto: auto;
+$padding: 10px;
+ 
+// Necessary classes for component elemen0s
+@mixin error-text {
+     color: red;font-size: 16px;font-weight: bold;list-style: none; text-decoration: none;
+}
+ @mixin header {
+    margin: auto; padding: 10px; font-size: 18px;
+ }
+ // font-family mixins
+@mixin text-ns { font-family: "NanumSquare", sans-serif; }
+@mixin text-ng { font-family: "Nanum Gothic", sans-serif; }
+@mixin text-nm { font-family: "Nanum Myeongjo", serif; }
+@mixin text-prt     { font-family: "Pretendard", sans-serif !important; }
+@mixin text-prt-m   { font-weight: 500; }
+@mixin text-prt-sb  { font-weight: 600; }
+@mixin text-prt-b   { font-weight: 700; }
+@mixin text-prt-eb  { font-weight: 800; }
+@mixin label {
+    padding-top: 10px; padding-bottom: 10px; font-size: 18px; display: block;
+}
+@mixin input_number {
+    height: 30px;width: 100%; border-radius: 20px; border: 1px solid black; font-size: 18px; padding: 10px; margin-right: 10px;
+}
+@mixin input_text {
+    height: 30px;width: 100%; border-radius: 20px; border: 1px solid black; font-size: 18px; padding: 10px; margin-right: 10px;
+}
+@mixin input_file {
+    border-radius: 20px;margin-top: 10px;margin-bottom: 10px;background: #ED1C1B;border: 2px solid #fff;color: #fff;cursor: pointer;font-size: 12px;outline: none;padding: 10px 10px;text-transform: uppercase;transition: all 1s ease;
+}
+@mixin textarea {
+    margin-top: 10px;width: 100%;height: 100px;padding: 12px 20px;border: 2px solid #ccc;border-radius: 4px;background-color: #f8f8f8;font-size: 16px;resize: none;
+}
+.cancel_button {border-radius: 15px;height: 35px;width: 45%;margin-top: 20px;color: #fff;background-color: red;}
+@mixin  upload_button {border-radius: 15px;height: 35px;width: 45%;margin-top: 20px;margin-left: 10px;color: #fff;background-color: rgb(0, 140, 255); cursor: pointer; text-align: center; justify-content: center;}
+@mixin  submit_button {
+    border: 1px solid black;font-size: 16px;height: 40px;width: 150px;background-color: #47b5ff;color: #fff;font-weight: 300;font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;border-radius: 20px;  margin-top: 15px;
+}
+@mixin section_struct {justify-content: center;height: 700px;overflow-x: scroll;overflow-y: none;}
+@mixin align_center {
+    display: flex;justify-content: space-around;text-align: center;
+}
+:root {
+    --process-nav-width: 72px;
+    --process-editor-top-height: 60px;
+    --popup-index-max: 999;
+  }
+
+// $theme-colors: (
+//   "primary": $primary,
+//   "gnb": $gnb,
+//   "platform": $platform,
+//   "platform-light": $platform-light,
+//   "secondary": $secondary,
+//   "black": $black,
+//   "dark": $dark,
+//   "light": $light,
+//   "white": $white,
+//   "dark-gray": $dark-gray,
+//   "middle-gray": $middle-gray,
+//   "light-gray": $light-gray,
+//   "gray-fb": $gray-fb,
+//   "gray-f5": $gray-f5,
+//   "gray-e5": $gray-e5,
+//   "gray-59": $gray-59,
+//   "gray-5": $gray-5,
+//   "gray-6": $gray-6,
+//   "gray-9": $gray-9,
+//   "gray-e": $gray-e,
+//   "gray-4": $gray-4,
+//   "gray-40": $gray-40,
+//   "gray-3": $gray-3,
+//   "gray-2": $gray-2,
+//   "gray-0d": $gray-0d,
+//   "gray-da": $gray-da,
+//   "gray-ce": $gray-ce,
+//   "gray-b7": $gray-b7,
+//   "gray-d5": $gray-d5,
+//   "gray-6d": $gray-6d,
+//   "gray-e4": $gray-e4,
+//   "light-blue": $light-blue,
+//   "middle-blue": $middle-blue,
+//   "light-orange": $light-orange,
+//   "gray-faf": $gray-faf,
+//   "transparent": $transparent,
+//   "red": $red,
+//   "blue": $blue,
+//   "green": $green,
+//   "yellow": $yellow,
+//   "orange": $orange,
+//   "purple": $purple,
+//   // 에디터용 색상들
+//   // "2f4aa9": $blue,
+//   // "ec4f4f": $red,
+//   // "73b540": $green,
+//   // "905fae": $purple,
+//   "da5802": #da5802,
+//   // "ee941d": $orange,
+//   "8976fa": $blue,
+//   "404040": $gray-40,
+//   "3ab8a3": $green,
+//   "326696": $purple,
+//   "e99f3f": $orange,
+// ) !default;
+
+// $input-btn-focus-box-shadow: none;
+// $input-btn-focus-width: 0;
+// $btn-focus-box-shadow: none;
+
+// h1,
+// h2,
+// h3,
+// h4,
+// h5,
+// h6 {
+//   margin-bottom: 0;
+// }
+
+// .bg-orange,
+// .bg-ee941d,
+// .btn-orange,
+// .bg-ee941d {
+//   color: white;
+// }
+
+// pre {
+//   position: fixed;
+//   right: 0;
+//   bottom: 0;
+//   padding: 4px;
+//   width: 300px;
+//   background-color: #ededed;
+//   max-height: 600px;
+//   overflow-y: scroll;
+//   z-index: 9999;
+// }
+
+// .platform-tabs {
+//   border-bottom: 0;
+//   align-items: stretch;
+//   .nav-item {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//   }
+//   .nav-link {
+//     width: 100%;
+//     height: 100%;
+//     flex-grow: 1;
+//     padding: 10px 4px;
+//     border: 0;
+//     border-bottom: 3px solid #eaecf0;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//     span {
+//       color: #808080;
+//     }
+//     h1 {
+//       color: #404040;
+//     }
+//     &.active {
+//       span,
+//       h1 {
+//         color: $platform;
+//       }
+//       h1 {
+//         font-weight: 600;
+//       }
+//       border-bottom: 3px solid $platform;
+//     }
+//   }
+// }
+// .tab-pane {
+//   padding: 16px 0;
+// }
+
+// .scroll-wrapper {
+//   overflow-y: auto;
+//   &::-webkit-scrollbar-track {
+//     width: 12px;
+//     background-color: #ededed;
+//   }
+// }
+
+// .bg-platform-dark {
+//   // background: linear-gradient(rgba(40, 46, 69, 1) 20%, rgba(28, 40, 95, 1));
+//   background-color: #040c19;
+// }
+
+// /* 에디터의 이미지 설정 */
+// .ProseMirror {
+//   > * + * {
+//     margin-top: 0.75em;
+//   }
+
+//   img {
+//     width: 100%;
+//     max-width: 640px;
+//     height: auto;
+
+//     &.ProseMirror-selectednode {
+//       outline: 3px solid #68cef8;
+//     }
+//   }
+// }
+
+// :root {
+//   --process-nav-width: 72px;
+//   --process-editor-top-height: 60px;
+//   --popup-index-max: 999;
+  
+// }
+
+
+
+// // 스크롤바 디자인
+// @mixin scrlbar ( $size : 6px , $radius : 10px ) {
+//   $clr: #ddd;
+//   &::-webkit-scrollbar {
+//     width: $size; height: $size;
+//     cursor: pointer; 
+//   }
+//   &::-webkit-scrollbar-thumb {
+//     background: $clr;
+//     border-radius: $radius;
+//   }
+//   &::-webkit-scrollbar-thumb:hover {
+//     // background-color: rgba(150, 150, 150, 0.7);
+//     background-color: darken($color: $clr, $amount: 20); 
+//   }
+// }

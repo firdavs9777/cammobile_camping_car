@@ -40,7 +40,7 @@ export default {
     },
   };
   </script>
-  <style scoped>
+  <style scoped lang="scss">
   .trailer 
   {
     min-height: 500px;

@@ -4,6 +4,36 @@
 </div>
 </template>
 <script>
+export default {
+ // Init events & Lifecycle 
+  // Lifecycle 
+  beforeCreate(){
+  },
+  // Init injections & reactivity 
+  created(){
+
+  },
+  beforeMount()
+  {
+
+  },
+  mounted()
+  {
+
+  },
+  beforeUpdate(){
+
+  },
+  updated(){
+
+  },
+  beforeDestroy(){
+
+  },
+  destroyed(){
+
+  },
+}
 </script>
 <style scoped>
 .introduction 

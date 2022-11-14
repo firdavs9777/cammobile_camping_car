@@ -32,8 +32,11 @@ export default {
 
 }
 </script>
-<style>
+<style lang="scss">
+
+// $main-bg-color:blue;
 #app {
+  // background-color: $main-bg-color;
   font-size:12px;
   width:420px;
   height: 100vh;
@@ -43,7 +46,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
   overflow: hidden;
   position: relative;
 }

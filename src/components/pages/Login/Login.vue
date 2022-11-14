@@ -31,12 +31,40 @@
         </li>
       </ul>
     </form>
-    <div class="register">
-
-    </div>
   </div>
 </template>
-<script></script>
+<script>
+export default {
+   // Init events & Lifecycle 
+  // Lifecycle 
+  beforeCreate(){
+  },
+  // Init injections & reactivity 
+  created(){
+
+  },
+  beforeMount()
+  {
+
+  },
+  mounted()
+  {
+
+  },
+  beforeUpdate(){
+
+  },
+  updated(){
+
+  },
+  beforeDestroy(){
+
+  },
+  destroyed(){
+
+  },
+}
+</script>
 <style scoped>
 .login {
   height: auto;

@@ -1,29 +1,29 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "../../src/components/pages/Home/Home.vue";
-import Login from "../../src/components/pages/Login/Login.vue";
-import FindPassword from "../../src/components/pages/Password/FindPassword.vue";
-import Register from "../../src/components/pages/Register/Register.vue";
-import Introduction from "../components/pages/Introduction/Introduction.vue";
-import Notification from "../components/pages/Notification/Notification.vue";
-import MyProfile from "../components/pages/MyProfile/my_profile_main.vue";
-import SoldItems from "../components/pages/SoldItems/SoldItems.vue";
-import PurchasedProducts from "../components/pages/PurchasedProducts/PurchasedProducts.vue";
-import WishList from "../components/pages/WishList/WishList.vue";
-import RecentViews from "../components/pages/RecentViews/RecentViews.vue";
-import CustomerService from "../components/pages/CustomerService/CustomerService.vue";
-import Trailer from "../components/pages/Trailer/TrailerMain.vue";
-import TrailerSearch from "../components/pages/Trailer/TrailerSearchList.vue";
-import MotorHome from "../components/pages/MotorHome/MotorHome.vue";
-import MotorHomeSearch from "../components/pages/MotorHome/Mr_Home_Search.vue";
+import Home from "@pages/Home/Home.vue";
+import Login from "@pages/Login/Login.vue";
+import FindPassword from "@pages/Password/FindPassword.vue";
+import Register from "@pages/Register/Register.vue";
+import Introduction from "@pages/Introduction/Introduction.vue";
+import Notification from "@pages/Notification/Notification.vue";
+import MyProfile from "@pages/MyProfile/my_profile_main.vue";
+import SoldItems from "@pages/SoldItems/SoldItems.vue";
+import PurchasedProducts from "@pages/PurchasedProducts/PurchasedProducts.vue";
+import WishList from "@pages/WishList/WishList.vue";
+import RecentViews from "@pages/RecentViews/RecentViews.vue";
+import CustomerService from "@pages/CustomerService/CustomerService.vue";
+import Trailer from "@pages/Trailer/TrailerMain.vue";
+import TrailerSearch from "@pages/Trailer/TrailerSearchList.vue";
+import MotorHome from "@pages/MotorHome/MotorHome.vue";
+import MotorHomeSearch from "@pages/MotorHome/Mr_Home_Search.vue";
+import NotFound from '@pages/NotFound.vue';
+import Test from "@pages/test/Test.vue";
+import Trailer_Thumbnail from "@pages/Trailer/TrailerThumbList.vue";
+import myTrailer from "@pages/MyProfile/my_trailer.vue";
+import Upload_Motor from "@pages/MyProfile/upload_motor.vue";
+import upload_page from "@pages/MyProfile/upload_page.vue"
 
-import Test from "../components/pages/test/Test.vue";
-import Trailer_Thumbnail from "../components/pages/Trailer/TrailerThumbList.vue";
-import myTrailer from "../components/pages/MyProfile/my_trailer.vue";
-import Upload_Motor from "../components/pages/MyProfile/upload_motor.vue";
-import upload_trailer from "../components/pages/MyProfile/upload_trailer.vue"
-import edit_motor from '../components/pages/MyProfile/edit_motor.vue';
-import edit_trailer from '../components/pages/MyProfile/edit_trailer.vue';
+
 Vue.use(Router);
 
 const router = new Router({
@@ -130,20 +130,21 @@ const router = new Router({
       component: Upload_Motor,
     },
     {
-      path: "/upload_trailer",
-      name: "upload_trailer",
-      component: upload_trailer,
+      path: "/upload_page",
+      name: "upload_page",
+      component: upload_page,
     },
     {
-      path:"/edit_motor",
-      name:"edit_motor",
-      component:edit_motor
-    }, 
+      path: "/upload_page/:id",
+      name: "upload_page",
+      component: upload_page,
+      props:true
+    },
+  
     {
-        path:"/edit_trailer",
-        name:"edit_trailer",
-        component: edit_trailer
-    }
+      path: '/:notFound(.*)',
+      component: NotFound,
+    },
   ],
 });
 export default router;
