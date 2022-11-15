@@ -2,35 +2,19 @@
   <div class="sidebar" :class="active">
     <div class="sidebar-panel">
       <div class="profile_main">
-        <div class="profile">
-          <span class="divider"></span>
-          <button @click="closeHandler">
-            <i class="ri-close-line"></i>
-          </button>
-        </div>
+      <img  v-if="isLoggedIn" src="../../assets/avatar.png" alt="Avatar" class="avatar" />
+      <ul>
+        <li v-if="!isLoggedIn" @click="closeHandler">
+          <router-link to="/register">Register</router-link>
+        </li>
+        <li v-if="!isLoggedIn" @click="closeHandler">
+          <router-link to="/login">Login</router-link>
+        </li>
+        <li v-if="isLoggedIn">
+          <button @click="logout">Logout </button>
+        </li>
 
-        <div class="account_registered" v-if="isLogin">
-          <img src="../../assets/avatar.png" alt="Avatar" class="avatar" />
-          <span class="user_name"><h1>Mister Johnson</h1></span>
-          <button class="logout">Logout</button>
-        </div>
-
-        <div v-else>
-          <img src="../../assets/avatar.png" alt="Avatar" class="avatar" />
-
-          <p class="login_first">Please login first</p>
-          <br />
-          <button class="login" @click="closeHandler">
-            <router-link to="/login"> Login </router-link>
-          </button>
-          <button class="register" @click="closeHandler">
-            <router-link to="/register"> Register </router-link>
-          </button>
-        </div>
-      </div>
-      <slot>
-        <ul>
-          <li @click="closeHandler">
+        <li @click="closeHandler">
             <router-link to="/myprofile"> 마이 페이지 </router-link>
           </li>
           <hr class="line" />
@@ -55,15 +39,14 @@
           <li @click="closeHandler">
             <router-link to="/customerservice"> 고객 센터 </router-link>
           </li>
-          <hr class="line" />
-        </ul>
-      </slot>
-      <!-- {{ String( menubarOpenBln ) }} -->
+      </ul>
+      </div>
     </div>
   </div>
 </template>
 <script>
 export default {
+  
   props: {
     menubarOpenBln: Boolean,
     closeHandler: Function,
@@ -71,16 +54,27 @@ export default {
   data: () => ({
     isPanelOpen: true,
     active: null,
-    isLogin: false,
+    isLogout:false,
   }),
   watch: {
     menubarOpenBln() {
       this.active = this.menubarOpenBln ? "active" : null;
     },
   },
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;    
+    },
+  },
   methods: {
     closeSidebarPanel() {
       this.isPanelOpen = false;
+    },
+    logout() {
+      this.$store.dispatch('logout');
+      this.closeHandler();
+      this.$router.go();
+      this.$router.replace('/login');
     },
   },
   mounted: () => {
@@ -126,7 +120,6 @@ export default {
 .sidebar.show .sidebar-panel {
   transform: translateX(0%);
 }
-
 .sidebar-panel {
   overflow-y: auto;
   /* background-color: #aaa7c9; */
@@ -138,14 +131,13 @@ export default {
   z-index: 999;
   width: 80%;
   transition: all 0.2s ease 0.1s;
-  background: #ddf4fa;
+  background: #fff;
   color: #333;
   justify-content: flex;
   flex-direction: row;
   /* width: calc( var( --width ) - 10% ); */
 }
 .profile_main {
-  background-color: #ddf4fa;
   height: auto;
   display: flex-box;
   flex-direction: row;

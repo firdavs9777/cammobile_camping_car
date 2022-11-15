@@ -1,15 +1,22 @@
 <template>
   <div class="login">
-    <form>
+    <base-dialog :show="isLoading" title="Authenticating" fixed>
+      <base-spinner></base-spinner>
+      </base-dialog>
+    <form @submit.prevent="submitForm">
       <h1 class="heading">cammobile</h1>
-      <label for="email">이메일</label>
-      <br />
-      <input type="email" class="email" placeholder="Email" />
-      <br />
-      <label for="password">비밀번호</label>
-      <br />
-      <input type="password" class="password" placeholder="Password" />
-      <br />
+      <div class="form-control">
+            <label for="email">Email</label>
+             <input type="email" id="email" v-model.trim="email" />
+        </div>
+        <div class="form-control">
+        <label for="password">Password</label>
+        <input type="password" id="password" v-model.trim="password" />
+        </div>  
+        <p v-if="!formIsValid">
+          Please enter a valid email and password (must be at least 6 characters
+          long)
+        </p>
       <button type="submit" class="login-button">로그인</button>
       
       <button type="submit" class="kakao-login">
@@ -33,10 +40,9 @@
     </form>
   </div>
 </template>
+
 <script>
 export default {
-   // Init events & Lifecycle 
-  // Lifecycle 
   beforeCreate(){
   },
   // Init injections & reactivity 
@@ -49,7 +55,7 @@ export default {
   },
   mounted()
   {
-
+   console.log(this.$store.getters.isAuthenticated);
   },
   beforeUpdate(){
 
@@ -61,10 +67,51 @@ export default {
 
   },
   destroyed(){
-
   },
-}
+  data() {
+    return {
+      email: '',
+      password: '',
+      formIsValid: true,
+      mode: 'login',
+      isLoading: false,
+      error: null,
+    };
+  },
+  methods: {
+    handleError() {
+      this.error = null;
+    },
+    async submitForm() {
+      this.formIsValid = true;
+      if (
+        this.email === '' ||
+        !this.email.includes('@') ||
+        this.password.length < 6
+      ) {
+        this.formIsValid = false;
+        return;
+      }
+      this.isLoading = true;
+      // Send http request
+      try {
+          await this.$store.dispatch('login', {
+            email: this.email,
+            password: this.password,
+          });
+          this.$router.replace('/');   
+      } catch (err) {
+        this.error = err.message || 'Failed to authenticate ';
+      }
+      this.isLoading = false;
+      this.$router.go();
+    }, 
+  },
+};
 </script>
+
+
+
 <style scoped>
 .login {
   height: auto;
@@ -73,27 +120,31 @@ export default {
   align-items: center;
   text-align: center;
 }
-
 form {
-
-  width: 100%;
   padding: 1rem;
 }
-
-.heading {
-  font-size: 50px;
-  color: #47b5ff;
-  padding: 10px;
-  margin: 20px;
-}
-
 label {
-  font-size: 20px;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
 }
-
+input,
+textarea {
+  display: block;
+  width: 100%;
+  font: inherit;
+  border: 1px solid #ccc;
+  padding: 0.15rem;
+}
+input:focus,
+textarea:focus {
+  border-color: #3d008d;
+  background-color: #faf6ff;
+  outline: none;
+}
 .email {
   height: 40px;
-  width: 200px;
+  width:100%;
   border: 1px solid #ccc;
   margin: 15px;
   padding-left: 10px;
@@ -103,7 +154,7 @@ label {
 .login-button {
   font-size: 16px;
   height: 40px;
-  width: 200px;
+  width: 100%;
   background-color: #47b5ff;
   border-radius: 20px;
   margin-top: 15px;

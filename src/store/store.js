@@ -1,21 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import counter from './modules/counter';
-import actions from './actions';
-import getters from './getters';
-import mutations from './mutations';
-import menuToggle from './modules/menutoggle';
+import authentication from './modules/authentication/index';
+import options from './modules/options/index';
 Vue.use(Vuex);
-export const store = new Vuex.Store({
-    state:{
-        value:0,
-        btn: false,
-    },
-    getters,
-    mutations,
-    actions,
+const store = new Vuex.Store({
     modules:{
-        counter,
-        menuToggle
+     authentication: authentication,
+     options:options
     }
-})
+});
+export default store;

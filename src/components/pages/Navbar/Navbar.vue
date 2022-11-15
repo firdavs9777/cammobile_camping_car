@@ -6,18 +6,10 @@
       <h1 style="">
         <router-link to="/" class="heading">Cammobile</router-link>
       </h1>
-      <!-- <div v-if="menu">
-        <MenuBar @icon-clicked="hi" />
-      </div> -->
     </div>
-    <!-- <router-link to="/" class="logo">캠모빌</router-link> -->
     <div class="icons-bar" v-if="isLogin">
       <ul>
-        <!-- <h1 class="title-name">
-          <router-link to="/" class="logo">캠모빌</router-link>
-    </h1>
-       -->
-        <li>
+        <li  v-if="isLoggedIn">
           <br>
           <router-link to="/notification">
             <i class="ri-notification-line">
@@ -27,9 +19,9 @@
           </router-link>
         </li>
 
-        <li>
+        <li v-if="isLoggedIn">
           <br>
-          <router-link to="/myprofile">
+          <router-link to="/myprofile" >
             <i class="ri-user-line"></i>
             <br>
             My Profile
@@ -40,7 +32,6 @@
   </header>
 </template>
 <script>
-// import MenuBar from "../MenuBar/MenuBar.vue";
 export default {
   props: {
     menuTogglefunc: Function,
@@ -51,7 +42,11 @@ export default {
       isLogin: true
     };
   },
-
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
+    }
+  },
   methods: {
     hi: function () {
       this.menu = !this.menu;
@@ -59,7 +54,6 @@ export default {
       console.log("helooo");
     },
   },
-  // components: { MenuBar },
 };
 </script>
 <style scoped>
@@ -73,35 +67,27 @@ header {
 .icon-main {
   width: 50px;
 }
-
-
 .icon-main h1 a {
   text-decoration: none;
   color: #333;
 }
-
 .icon-main i {
   margin-top: 0px;
   font-size: 40px;
   margin: 10px;
 }
-
 ul {
   display: flex;
   width: 100%;
 }
-
 li {
   display: inline;
 }
-
 .title-name {
-
   padding: 5px;
   font-size: 18px;
   color: #333;
 }
-
 .banner {
   margin-top: 10px;
   padding-top: 10px;

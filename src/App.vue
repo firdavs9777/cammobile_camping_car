@@ -18,17 +18,32 @@ export default {
     Navbar , 
     // Footer , 
     MenuBar , 
-  } , 
+  },
+  created() {
+    this.$store.dispatch('autoLogin');
+  },
+  computed: {
+    didAutoLogout() {
+      return this.$store.getters.didAutoLogout;
+    },
+  },
+  watch: {
+    didAutoLogout(curValue, oldValue) {
+      if (curValue && curValue !== oldValue) {
+        this.$router.replace('/');
+      }
+    },
+  }, 
   data () {
     return {
       menubarOpenBln : false , 
     }
-  } , 
+  }, 
   methods : {
     menuTogglefunc () {
       this.menubarOpenBln = !this.menubarOpenBln ; 
     }
-  } , 
+  }, 
 
 }
 </script>

@@ -44,7 +44,7 @@
         <h2>회망가격: 23.100.000 원</h2>
         <button>자세하기 보기</button>
       </div>
-      <div class="samples">
+      <!-- <div class="samples">
         <img src="../../assets/motor-home.png" class="sample_image" />
         <h1>Adria Babab</h1>
         <p>20년12월(20년식) / 22.000km / 경기</p>
@@ -64,14 +64,20 @@
         <p>20년12월(20년식) / 22.000km / 경기</p>
         <h2>회망가격: 23.100.000 원</h2>
         <button>자세하기 보기</button>
-      </div>
+      </div> -->
       <p>{{ message }}</p>
-
+<Footer/>
     </div>
+    <footer></footer>
   </div>
 </template>
 <script>
+import Footer from '../Foooter/Footer.vue';
 export default {
+  components: { 
+   
+    Footer , 
+  },
   // Init events & Lifecycle 
   // Lifecycle 
   beforeCreate(){

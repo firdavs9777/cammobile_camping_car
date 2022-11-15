@@ -1,26 +1,22 @@
 <template>
     <div class="register">
-        <form>
+        <base-dialog :show="isLoading" title="Authenticating" fixed>
+      <base-spinner></base-spinner>
+      </base-dialog>
+        <form @submit.prevent="submitForm">
             <h1 class="heading">cammobile</h1>
-            <label>Username</label>
-            <br>
-            <input type="text" placeholder="Username" class="username">
-            <br>
+            <div class="form-control">
+             <label for="username">Username</label>
+             <input type="username" id="username"  />
+            </div>
+            <div class="form-control">
             <label for="email">Email</label>
-            <br />
-            <input type="email" class="email" placeholder="Email" />
-            <br />
-            <label>
-                Profile Image(optional)
-            </label>
-            <input type="file" />
-            <label for="password">Password</label>
-            <br />
-            <input type="password" class="password" placeholder="Password" />
-            <br />
-            <label for="password">Password Confirmation</label>
-            <br />
-            <input type="password" class="password" placeholder="Password" />
+             <input type="email" id="email" v-model.trim="email" />
+             </div>
+             <div class="form-control">
+             <label for="password">Password</label>
+             <input type="password" id="password" v-model.trim="password" />
+             </div>           
             <br />
             <button type="submit" class="signup-button">회원가입</button>
             <button type="submit" class="kakao-signup">
@@ -30,70 +26,91 @@
                 <i class="ri-google-fill"></i> Google으로 회원가입
             </button>
         </form>
-
     </div>
 </template>
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+      formIsValid: true,
+      mode: 'login',
+      isLoading: false,
+      error: null,
+    };
+  },
+  methods: {
+    handleError() {
+      this.error = null;
+    },
+    async submitForm() {
+      this.formIsValid = true;
+      if (
+        this.email === '' ||
+        !this.email.includes('@') ||
+        this.password.length < 6
+      ) {
+        this.formIsValid = false;
+        return;
+      }
+      this.isLoading = true;
+      // Send http request
+      try {
+          await this.$store.dispatch('signup', {
+            email: this.email,
+            password: this.password,
+          });
+          this.$router.replace('/');
+          alert('Sucessfully registered');    
+      } catch (err) {
+        this.error = err.message || 'Failed to authenticate ';
+      }
+      this.isLoading = false;
+      this.$router.go();
+    }, 
+  },
+};
+</script>
 <style scoped>
 .register {
+    height: auto;
     margin: auto;
     background-color: #F5F5F5;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
-
 form {
-    width: 100%;
-    padding-top: 10px;
-    padding-bottom: 15px;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+  padding: 1rem;
 }
-
-.heading {
-    font-size: 50px;
-    color: #47b5ff;
-    padding: 10px;
-    margin: 20px;
-}
-
 label {
-    display: block;
-    font-size: 18px;
-    padding-top: 10px;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
 }
-
-.username {
-    height: 40px;
-    width: 200px;
-    border: 1px solid #ccc;
-    padding-left: 10px;
-    border-radius: 10px;
+input,
+textarea {
+  display: block;
+  width: 100%;
+  font: inherit;
+  border: 1px solid #ccc;
+  padding: 0.15rem;
 }
-
-input[type=file] {
-    text-align: left;
-    height: 35px;
-    padding-left: 20px;
-    margin-top: 10px;
-    margin-left: 10px;
-
+input:focus,
+textarea:focus {
+  border-color: #3d008d;
+  background-color: #faf6ff;
+  outline: none;
 }
-
-.email {
-    height: 40px;
-    width: 200px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    padding-left: 10px;
-    border-radius: 10px;
+.form-control {
+  margin: 0.5rem 0;
 }
 
 .signup-button {
     font-size: 16px;
     height: 35px;
-    width: 200px;
+    width: 100%;
     background-color: #47b5ff;
     border-radius: 20px;
     margin-top: 10px;
@@ -104,7 +121,7 @@ input[type=file] {
     display: block;
     color: #333;
     height: 35px;
-    width: 200px;
+    width: 100%;
     background-color: #F7E317;
     border-radius: 20px;
     margin-top: 10px;
@@ -115,7 +132,7 @@ input[type=file] {
 .google-signup {
     color: #333;
     height: 35px;
-    width: 200px;
+    width: 100%;
     background-color: #81C6E8;
     border-radius: 20px;
     margin-top: 10px;

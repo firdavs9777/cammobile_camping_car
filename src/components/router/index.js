@@ -21,7 +21,8 @@ import Test from "@pages/test/Test.vue";
 import Trailer_Thumbnail from "@pages/Trailer/TrailerThumbList.vue";
 import myTrailer from "@pages/MyProfile/my_trailer.vue";
 import Upload_Motor from "@pages/MyProfile/upload_motor.vue";
-import upload_page from "@pages/MyProfile/upload_page.vue"
+import upload_page from "@pages/MyProfile/upload_page.vue";
+import store from '@/store/store.js';
 
 
 Vue.use(Router);
@@ -58,31 +59,37 @@ const router = new Router({
       path: "/notification",
       name: "notification",
       component: Notification,
+      meta: { requiresAuth: true }
     },
     {
       path: "/myprofile",
       name: "myprofile",
       component: MyProfile,
+      meta: { requiresAuth: true }
     },
     {
       path: "/solditems",
       name: "solditems",
       component: SoldItems,
+      meta: { requiresAuth: true }
     },
     {
       path: "/purchasedproducts",
       name: "purchasedproducts",
       component: PurchasedProducts,
+      meta: { requiresAuth: true }
     },
     {
       path: "/wishlist",
       name: "wishlist",
       component: WishList,
+      meta: { requiresAuth: true }
     },
     {
       path: "/recentviews",
       name: "recentviews",
       component: RecentViews,
+      meta: { requiresAuth: true }
     },
     {
       path: "/customerservice",
@@ -93,6 +100,7 @@ const router = new Router({
       path: "/trailer",
       name: "trailer",
       component: Trailer,
+      meta: { requiresAuth: true }
     },
     {
       path: "/trailer_search",
@@ -128,17 +136,19 @@ const router = new Router({
       path: "/upload_motor",
       name: "upload_motor",
       component: Upload_Motor,
+      meta: { requiresAuth: true }
     },
     {
       path: "/upload_page",
       name: "upload_page",
       component: upload_page,
+      meta: { requiresAuth: true }
     },
     {
       path: "/upload_page/:id",
       name: "upload_page",
       component: upload_page,
-      props:true
+      meta: { requiresAuth: true }
     },
   
     {
@@ -146,5 +156,14 @@ const router = new Router({
       component: NotFound,
     },
   ],
+});
+router.beforeEach(function (to, from, next) {
+  if (to.meta.requiresAuth && !store.getters.isAuthenticated) {
+    next('/login');
+  } else if (to.meta.requiresUnauth && store.getters.isAuthenticated) {
+    next('/');
+  } else {
+    next();
+  }
 });
 export default router;

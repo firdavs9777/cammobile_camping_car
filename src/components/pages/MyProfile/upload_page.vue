@@ -25,8 +25,16 @@
         <input type="text" v-model="post.car_name" placeholder="Car Name" />
       </div>
       <div class="form_section">
+        <label>모델</label>
+        <input type="text" v-model="post.model" placeholder="Model Name" />
+      </div>
+      <div class="form_section">
         <label>판매가</label>
         <input type="text" placeholder="Ex: 23.100.000 " v-model="post.price" />
+      </div>
+      <div class="form_section">
+        <label>Manufactured_by</label>
+        <input type="text" placeholder="Ex: Samsung or LG" v-model="post.manufactured_by"/>
       </div>
       <div class="form_section">
         <label>연식 </label>
@@ -94,7 +102,9 @@
         <label>Comment</label>
         <input type="text" v-model="post.comment" />
       </div>
-      <div class="options_section">
+      <button class="upload_button" @click="hello()" type="button">Upload</button>
+
+      <div class="options_section" v-if="hi">
         <section v-for="(element, name, index) in options_main" :key="index">
           <label>{{ name }}</label>
           <select @change="getOption($event, `${name}`)">
@@ -124,7 +134,7 @@
               <li>
                 <span>옵션설명</span><textarea v-model="optionPopValue.comment" value="optionPopValue.comment"></textarea>
               </li>
-              <li><button type="submit" v-on:click="get_total_options">옵션선택 완료</button></li>
+              <li><button type="submit" class="done" v-on:click="get_total_options">옵션선택 완료</button></li>
             </ul>
           </div>
         </section>
@@ -223,6 +233,7 @@ export default {
         quantity: 0,
         comment: "",
       },
+      hi:false,
       options_main: [],
       total_options: [],
       address_sub_info: null,
@@ -230,8 +241,10 @@ export default {
       post:
       {
         car_name: "",
+        model:'',
         car_type: "",
         price: "",
+        manufactured_by:"",
         produced_year: "",
         insurance_history: "",
         outside_length: "",
@@ -264,6 +277,9 @@ export default {
     };
   },
   methods: {
+    hello(){
+      this.hi = !this.hi;
+    },
     delete_image(el) {
       let delete_val = this.images.indexOf(el);
       if (delete_val > -1) {
@@ -406,6 +422,7 @@ export default {
   form {
     .error_section {
       margin: auto;
+
       .error_text {
         @include error-text;
 
@@ -415,6 +432,7 @@ export default {
         }
       }
     }
+
     .heading {
       @include header;
     }
@@ -492,39 +510,48 @@ export default {
       border: 1px solid black;
       box-sizing: border-box;
       box-shadow: 3px 4px 4px rgb(100, 100, 100);
-    i {
-      font-size: 22px;
-      float: right;
-    i:hover {
-      opacity: 1;
-      ul {
-        font-size: 20px;
-       li {
-      list-style: none;
-      padding: 10px;
-    span {
-      font-size: 18px;
-      margin-bottom: 10px;
-      padding: 10px;
-      margin: 20px;
-      b {
-        font-size: 18px;
-        padding: 10px;
-        margin: 10px;
-    input {
-      padding-left: 10px;
-      font-size: 20px;
-    textarea {
-      @include textarea;
+
+      i {
+        font-size: 22px;
+        float: right;
+
+        i:hover {
+          opacity: 1;
+
+          ul {
+            font-size: 20px;
+
+            li {
+              list-style: none;
+              padding: 10px;
+
+              span {
+                font-size: 18px;
+                margin-bottom: 10px;
+                padding: 10px;
+                margin: 20px;
+
+                b {
+                  font-size: 18px;
+                  padding: 10px;
+                  margin: 10px;
+
+                  input {
+                    padding-left: 10px;
+                    font-size: 20px;
+
+                    textarea {
+                      @include textarea;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
-  }
-}
-    }
-  }
-}
-    }
-  }
-}
+
     .option-select-result {
       margin-top: 10px;
       border-radius: 10px;
@@ -549,12 +576,14 @@ export default {
             li {
               padding: $padding;
               margin-top: 10px;
+              @include upload_button;
 
               i:hover {
                 opacity: 1;
                 color: blue
               }
             }
+
           }
         }
       }
