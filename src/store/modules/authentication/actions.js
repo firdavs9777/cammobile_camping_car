@@ -20,7 +20,17 @@ export default {
     if (mode === 'signup') {
       url =
         'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA0dj4qv_X7Y6IsfdIZjaahJ2hgKfQ3K3U';
-    }
+    }   // const requestOptions = {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({ title: "Vue POST Request Example" })
+    //   };
+    //   const response1 = await fetch("https://jsonplaceholder.typicode.com/posts", requestOptions);
+    //   const data = await response.json();
+    //   this.postId = data.id;
+    //   console.log(response1)
+ 
+
     const response = await fetch(url, {
       method: 'POST',
       body: JSON.stringify({

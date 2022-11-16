@@ -22,7 +22,9 @@ import Trailer_Thumbnail from "@pages/Trailer/TrailerThumbList.vue";
 import myTrailer from "@pages/MyProfile/my_trailer.vue";
 import Upload_Motor from "@pages/MyProfile/upload_motor.vue";
 import upload_page from "@pages/MyProfile/upload_page.vue";
+import upload_form from "@pages/MyProfile/upload_form";
 import store from '@/store/store.js';
+
 
 
 Vue.use(Router);
@@ -142,7 +144,11 @@ const router = new Router({
       path: "/upload_page",
       name: "upload_page",
       component: upload_page,
-      meta: { requiresAuth: true }
+    },
+   {
+    path: '/upload_form',
+    name:"upload_form",
+    component:upload_form
     },
     {
       path: "/upload_page/:id",

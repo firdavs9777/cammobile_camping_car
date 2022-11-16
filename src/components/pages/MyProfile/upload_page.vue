@@ -102,8 +102,7 @@
         <label>Comment</label>
         <input type="text" v-model="post.comment" />
       </div>
-      <button class="upload_button" @click="hello()" type="button">Upload</button>
-
+  
       <div class="options_section" v-if="hi">
         <section v-for="(element, name, index) in options_main" :key="index">
           <label>{{ name }}</label>
@@ -412,6 +411,7 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+
 // Sass Settings for Css
 .upload_section {
   justify-content: center;
