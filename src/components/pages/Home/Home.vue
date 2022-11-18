@@ -66,6 +66,9 @@
         <button>자세하기 보기</button>
       </div> -->
       <p>{{ message }}</p>
+      <button class="compare" @click.stop.prevent="upload_page()">
+          <i class="ri-add-line"></i>
+        </button>
 <Footer/>
     </div>
     <footer></footer>
@@ -107,6 +110,10 @@ export default {
 
   },
   methods: {
+    upload_page() {
+      this.$router.push("upload_form");
+      // this.$router.push("/trailer_search");
+    },
     reverseMessage: function () {
       this.message = this.message.split(" ").reverse().join();
     },
@@ -155,5 +162,17 @@ export default {
   h1 {font-size: 18px;}
   button { height: 35px;background-color: #308d46;color: #fff;padding: 10px;border-radius: 20px;margin-top: 10px;}
 }
+.compare {
+  
+   height: 60px;
+   width:60px;
+   position: absolute;
+  bottom: 150px;
+  right: 20px;
+  border-radius: 50%;
+  }
+  i {
+  font-size: 30px;
+  }
 
 </style>

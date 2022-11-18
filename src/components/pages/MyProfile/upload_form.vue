@@ -8,15 +8,36 @@
             </ul>
             </p>
         </div>
+        <base-dialog :show="isLoading" title="Uploading" fixed>
+            <base-spinner></base-spinner>
+        </base-dialog>
         <form v-on:submit.prevent="sendFileItems()">
             <section v-for="(i, index) in pages" :key="index">
                 <section class="page1" v-if="i == 1 && num == 1">
-                    <h1>Page1</h1>
-                    <div class="page1_info">
-                        <h1>기본 정보</h1>
+                    <div>
+                        <img src="../../assets/variant1.png" class="step-image" />
+                    </div>
+
+                    <div class="page1_info" style="background-color:#F0F4F7;">
+                        <h1>캠핑카 타입</h1>
+
+                        <section v-for="(element, index) in car_types" :key="index">
+                            {{ element.text }}
+                            <input type="checkbox" value="element.text" v-model="post.car_type">
+                            <br />
+                        </section>
+
+
+                        <p id="id_work_days">
+
+                            <label><input type="checkbox" :value="1"
+                                    v-model="post.car_type"><span>Trailer</span></label>
+                            <label><input type="checkbox" id="1" :value="2"
+                                    v-model="post.car_type"><span>Motor</span></label>
+                        </p>
                         <div class="form_section">
                             <label>Car Type</label>
-                            <select v-model="post.car_type">
+                            <select v-model="post.car_type" class="car_type">
                                 <option selected value="">Please choose car type</option>
                                 <option>MOTOR</option>
                                 <option>TRAILER</option>
@@ -113,19 +134,12 @@
                 <section class="page2" v-if="i == 2 && num == 2">
                     <div class="page2_info">
                         <h1>옵션 선택</h1>
+                        <div>
+                            <img src="../../assets/variant2.png" class="step-image" />
+                        </div>
                         <section v-for="(element, name, index) in options_main" :key="index">
-                            <p>{{ element }}</p>
                             <label>{{ element.name }}</label>
                             <input type="checkbox" :value="element.idx" v-model="checkedidxs">
-                            <!-- <select @change="getOption($event, `${name}`)">
-                                <option selected value="start">{{ element.name }} 선택하십시오</option>
-                                <option> {{ element }} </option> -->
-                            <!-- <template v-for="(el, i) in element">
-              <option :key="i" :value="el.idx" :is_quantity="el.is_quantity">
-                {{ el.value }}
-              </option>
-            </template> -->
-                            <!-- </select> -->
                             <br />
                         </section>
                         <button class="upload_button" type="button" @click="page_previus">Previus</button>
@@ -135,24 +149,42 @@
 
                 <!-- Section 3-->
                 <section class="page3" v-if="i == 3 && num == 3">
-                    <div class="page3_info">
-                        <h1>옵션 상세</h1>
+                    <h1>옵션 상세</h1>
+                    <div>
+                        <img src="../../assets/variant3.png" class="step-image" />
+                    </div>
+                    <div class="page3_info" style="background-color:#F0F4F7;">
                         <h1>Checked names: {{ checkedidxs }}</h1>
                         <section v-for="(main_option, elox) in options_main" :key="elox">
                             <div v-for="(main, key_num, i) in selected_options" :key="i">
-                                <select v-if="key_num == main_option.idx"
-                                    @change="getOption($event, `${main_option.name}`)">
-                                    <option selected value="start">{{ main_option.name }}선택하십시오</option>
-                                    <template v-if="key_num == main_option.idx">
-                                        <option v-for="(el, il) in main" :key="il" :value="el.idx"
-                                            :is_quantity="el.is_quantity">
-                                            {{ el.txt }}
-                                        </option>
-                                    </template>
-                                </select>
+                             
+                                <div v-if="key_num === main_option.idx">
+                                    <h1 @click="main_comment_func(main)">{{ main_option.name }}</h1>
+                                    <div v-for="(element, id) in main" :key="id" :value="element.idx">
+                                        <p :id="element.txt" :style="{ 'background-color': activeButton === element.txt ? color : '' }"
+                                            v-on:click="select($event)">
+                                            {{ element.txt }}
+                                        </p>
+                                        <div v-if="element.idx && show && !main_comment"
+                                            style="display:flex;">      
+                                            <div v-if="main_option.is_quantity && element.txt != '기타'">
+                                                <label>Quantity</label>
+                                                <input type="number" />
+                                            </div>
+                                            <div>
+                                                <label>Option Comment</label>
+                                                <input type="text"  />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-if="key_num == main_option.idx && main_option.name && main_comment">
+                                    <label> {{ main_option.name }} Comment</label>
+                                    <input type="text"  />
+                                </div>
                             </div>
                         </section>
-                        <div class="option-select-box" v-if="optionPopValue.visible">
+                        <div class="option-select-box" v-if="optionPopValue.visible && optionPopValue.idx != 'start'">
                             <span></span>
                             <i class="ri-close-line" @click="close_option_bar"></i>
                             <ul>
@@ -169,11 +201,10 @@
                                     <span>옵션설명</span><textarea v-model="optionPopValue.comment"
                                         value="optionPopValue.comment"></textarea>
                                 </li>
-                                <li><button type="button" class="done" v-on:click="get_total_options">옵션선택
+                                <li><button type="button" class="submit_" v-on:click="get_total_options">옵션선택
                                         완료</button></li>
                             </ul>
                         </div>
-
                         <div class="option-select-result" v-if="total_options.length != 0">
                             <ul v-for="(option, option_key) in total_options" :key="option_key" class="result_list">
                                 <i class="ri-delete-bin-5-line" @click="delete_option(option)"></i>
@@ -182,7 +213,7 @@
                                 <li v-if="optionPopValue.is_quantity">
                                     Quantity: {{ option.quantity }}
                                 </li>
-                                <li>
+                                <li :value="2">
                                     Comment:{{ option.comment }}
                                 </li>
                                 <hr />
@@ -197,6 +228,9 @@
                 <section class="page4" v-if="i == 4 && num == 4">
                     <div class="page4_info">
                         <h1> 이미지</h1>
+                        <div>
+                            <img src="../../assets/variant4.png" class="step-image" />
+                        </div>
                         <div class="form_image">
                             <input type="file" class="form-control" accept="image" :disabled="selectedImage == ''"
                                 @change="uploadImage" required ref="input" />
@@ -232,10 +266,22 @@
                             <!-- <img :src="image.url" class="preview" style="width: 200px; margin: 10px" /> -->
                         </div>
                         <button class="upload_button" type="button" @click="page_previus">Previus</button>
-                        <button class="upload_button" type="submit">Submit</button>
+                        <button class="upload_button" type="button" @click="page_next">차량등록 계속하기</button>
                     </div>
                 </section>
-
+                <!-- Section 5-->
+                <section class="page5" v-if="i == 5 && num == 5">
+                    <div>
+                        <div>
+                            <img src="../../assets/variant5.png" class="step-image" />
+                        </div>
+                        <div>
+                            <img src="../../assets/Vector.png" style="width: 49px;height: 49px;" />
+                        </div>
+                        <button class="upload_button" type="button" @click="page_previus">Previus</button>
+                        <button class="upload_button" type="submit">메인으로 가기 </button>
+                    </div>
+                </section>
             </section>
         </form>
     </div>
@@ -255,24 +301,22 @@ export default {
         axios.get("http://cammobile.kr/q/api/hash/?c=local").then((rep) => {
             this.address_data = rep.data
         });
-        // console.log(this.$route.params.id);
-        if (this.$route.params.id) {
-            this.mobileidx = this.$route.params.id;
-            axios.get("http://cammobile.kr/q/api/mobile/?c=load&mobileidx=" + this.mobileidx + "")
-                .then((rep) => {
-                    this.post = rep.data.body;
-                    this.post.comment = rep.data.detail.comment
-                    this.options = rep.data.options;
-                    this.images = rep.data.images
-                });
-        }
+
     },
     data() {
         return {
+            elem:'',
+            show:false,
+            data: [1, 2, 3, 4, 5],
+            color: "",
+            activeButton: 0,
+            main_comment: true,
+            isLoading: false,
+            car_types: [{ text: 'MOTOR' }, { text: 'TRAILER' }],
             pages: 5,
             checkedidxs: [],
             selected_options: [],
-            num: 1,
+            num: 3,
             test_data: [],
             mobileidx: '',
             formData: new FormData(),
@@ -282,6 +326,7 @@ export default {
                 idx: 0,
                 text: "",
                 is_quantity: 0,
+                option_name: '',
                 quantity: 0,
                 comment: "",
             },
@@ -291,10 +336,10 @@ export default {
             address_data: null,
             post:
             {
-                car_name: "",
-                model: '',
                 car_type: "",
+                car_name: "",
                 price: "",
+                model: "",
                 manufactured_by: "",
                 produced_year: "",
                 insurance_history: "",
@@ -328,6 +373,23 @@ export default {
         };
     },
     methods: {
+        main_comment_func() {
+            this.main_comment = !this.main_comment;
+            this.color = '';
+        },
+        select: function (event) {
+            let targetId = event.currentTarget.id;
+            console.log(targetId);
+            if (targetId != '') {
+                this.color = '#f3b808';
+                this.activeButton = targetId;
+                this.main_comment = false;
+            }
+            if(targetId)
+            {
+                this.show = !this.show;
+            }
+         },
         page_previus() {
             this.num = this.num - 1;
         },
@@ -439,31 +501,37 @@ export default {
                         if (rep.error) {
                             alert(rep.message);
                         } else {
-                            this.$router.push("upload_page/" + rep.mobileidx);
+                            this.$router.push("/");
                         }
                     })
                     .catch((error) => {
                         console.log(error.message);
                     });
+                this.isLoading = true;
             }
             this.errors = [];
             if (!this.post.car_type) {
+                this.num = 1;
                 this.errors.push('Car Type is required');
             }
             if (!this.post.car_name) {
+                this.num = 1;
                 this.errors.push('Name is required');
             }
             if (!this.post.price) {
+                this.num = 1;
                 this.errors.push('Price is required');
             }
             if (!this.post.produced_year) {
+                this.num = 1;
                 this.errors.push('Produced Year is required');
             }
             if (!this.post.sale_area) {
+                this.num = 1;
                 this.errors.push('Sale Area  is required');
             }
-
             if (this.images.length == 0) {
+                this.num = 4;
                 this.errors.push('Please insert at least one image');
             }
             if (this.errors.length != 0) {
@@ -474,9 +542,38 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.step-image {
+    width: 100%;
+    margin-top: 10px;
+    padding: 24px 0px;
+}
+
 // Sass Settings for Css
 input[type="checkbox"] {
     vertical-align: baseline;
+}
+
+#id_work_days input[type="checkbox"] {
+    display: none;
+}
+
+#id_work_days span {
+    display: inline-block;
+    padding: 10px;
+    text-transform: uppercase;
+    border: 2px solid gold;
+    border-radius: 3px;
+    color: gold;
+}
+
+#id_work_days input[type="checkbox"]:checked+span {
+    background-color: gold;
+    color: black;
+}
+
+.car_type {
+    height: 30px;
+    border-color: #ED1C1B;
 }
 
 .upload_section {
@@ -654,6 +751,7 @@ input[type="checkbox"] {
                 }
             }
         }
+
         .image_section {
             margin: 10px;
             padding-top: 10px;
