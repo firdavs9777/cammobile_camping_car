@@ -288,6 +288,7 @@
 </template>
 <script>
 import axios from "axios";
+import { validate } from "json-schema";
 export default {
 
     //http://cammobile.kr/q/api/mobile/?c=option-load-sub   hashidxs"[3,4,5]"
@@ -462,16 +463,32 @@ export default {
             if (this.selectedImage != "" && e.target.files.length !== 0) {
                 // this.formData.append("IMG_"+this.selectedImage+"[]", e.target.files[0]);
                 var selectedFiles = e.target.files[0];
-                this.image_file = selectedFiles;
+                // this.image_file = selectedFiles;
                 if (selectedFiles > 0) {
                     alert("Same pictures, please insert another image");
                 }
+                // validate
+                // resizing
+
+                // var resImg  = resizeing;
+                // this.imgcount ++;
+
+                // outer > front_l
+
+
+                //let img_key = { outer : { front:"key1",front_l:null,fron_r:null }, inner:[], layout:[], etc:[] };
+
+                //const imgkey = "key"+this.imgcount;
+                //img_key.outer.front = imgkey;
+
+                //$_FILES["key1"] = []
                 let img = {
                     src: URL.createObjectURL(selectedFiles),
-                    name: "IMG_" + this.selectedImage,
+                    name: "key"+ this.selectedImage, //this.imgcount;
                     file: selectedFiles,
-                    text: this.typeName[this.selectedImage],
-                    url: URL.createObjectURL(selectedFiles),
+                    //targer : img_key.outer.front
+                    // text: this.typeName[this.selectedImage],
+                    // url: URL.createObjectURL(selectedFiles),
                 };
                 this.images.push(img);
             } else {
