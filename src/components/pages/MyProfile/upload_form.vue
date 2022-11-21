@@ -288,12 +288,10 @@
 </template>
 <script>
 import axios from "axios";
-import { validate } from "json-schema";
 export default {
 
     //http://cammobile.kr/q/api/mobile/?c=option-load-sub   hashidxs"[3,4,5]"
     mounted() {
-
         axios.post("http://cammobile.kr/q/api/mobile/?c=option-load").then((rep) => {
             this.options_main = rep.data;
             console.log(rep.data);
@@ -302,7 +300,6 @@ export default {
         axios.get("http://cammobile.kr/q/api/hash/?c=local").then((rep) => {
             this.address_data = rep.data
         });
-
     },
     data() {
         return {
@@ -317,7 +314,7 @@ export default {
             pages: 5,
             checkedidxs: [],
             selected_options: [],
-            num: 3,
+            num: 4,
             test_data: [],
             mobileidx: '',
             formData: new FormData(),
@@ -490,6 +487,7 @@ export default {
                     // text: this.typeName[this.selectedImage],
                     // url: URL.createObjectURL(selectedFiles),
                 };
+                console.log(img);
                 this.images.push(img);
             } else {
                 alert("타입 선택하시오!");

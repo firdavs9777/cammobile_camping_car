@@ -23,6 +23,7 @@ import myTrailer from "@pages/MyProfile/my_trailer.vue";
 import Upload_Motor from "@pages/MyProfile/upload_motor.vue";
 import upload_page from "@pages/MyProfile/upload_page.vue";
 import upload_form from "@pages/MyProfile/upload_form";
+import image_section from "@pages/MyProfile/image_section.vue";
 import store from '@/store/store.js';
 
 
@@ -36,6 +37,11 @@ const router = new Router({
       path: "/",
       name: "Home",
       component: Home,
+    },
+    {
+      path:"/image_section",
+      name:"image_section",
+      component: image_section
     },
     {
       path: "/login",
