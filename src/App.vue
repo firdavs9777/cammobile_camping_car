@@ -48,7 +48,7 @@ export default {
 }
 </script>
 <style lang="scss">
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 // $main-bg-color:blue;
 #app {
   // background-color: $main-bg-color;
@@ -56,7 +56,7 @@ export default {
   width:420px;
   height: 100vh;
   margin:0 auto;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Noto Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

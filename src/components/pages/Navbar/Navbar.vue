@@ -1,15 +1,14 @@
 <template>
   <header>
     <div class="icon-main">
-      <i class="ri-menu-line" @click="menuTogglefunc">
-      </i>
+      <i class="ri-menu-line" @click="menuTogglefunc"> </i>
       <h1 style="">
-        <router-link to="/" class="heading">Cammobile</router-link>
+        <router-link to="/" class="heading">CAMMOBILE </router-link>
       </h1>
     </div>
     <div class="icons-bar" v-if="isLogin">
       <ul>
-        <li  v-if="isLoggedIn">
+        <!-- <li  v-if="isLoggedIn">
           <br>
           <router-link to="/notification">
             <i class="ri-notification-line">
@@ -17,14 +16,13 @@
             <br>
             Notifications
           </router-link>
-        </li>
+        </li> -->
 
         <li v-if="isLoggedIn">
-          <br>
-          <router-link to="/myprofile" >
+          <br />
+          <router-link to="/myprofile">
             <i class="ri-user-line"></i>
-            <br>
-            My Profile
+            <br />
           </router-link>
         </li>
       </ul>
@@ -39,13 +37,13 @@ export default {
   data() {
     return {
       menu: false,
-      isLogin: true
+      isLogin: true,
     };
   },
   computed: {
     isLoggedIn() {
       return this.$store.getters.isAuthenticated;
-    }
+    },
   },
   methods: {
     hi: function () {
@@ -61,7 +59,7 @@ header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: #faf7f0;
+  background-color: #16abff;
 }
 
 .icon-main {
@@ -72,9 +70,9 @@ header {
   color: #333;
 }
 .icon-main i {
-  margin-top: 0px;
   font-size: 40px;
   margin: 10px;
+  color: #ffffff;
 }
 ul {
   display: flex;
@@ -118,10 +116,10 @@ li {
 }
 
 .icons-bar i {
-  font-size: 16px;
-  color: black;
+  padding-right: 20px;
+  font-size: 22px;
+  color: #ffffff;
 }
-
 .icons-bar a:active,
 .icons-bar a:hover,
 .icons-bar a.router-link-active {
@@ -132,12 +130,13 @@ li {
 
 h1 {
   display: inline;
-  position: absolute;
-  top: 1%;
-  left: 12%;
   font-size: 16px;
   margin-bottom: 20px;
   padding-bottom: 10px;
+}
+.heading {
+  margin: auto;
+  padding-right: 20px;
 }
 
 .logo:hover,

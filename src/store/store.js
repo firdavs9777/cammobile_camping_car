@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import authentication from './modules/authentication/index';
-import options from './modules/options/index';
+import upload_data from './modules/upload_data/index';
 Vue.use(Vuex);
 const store = new Vuex.Store({
     modules:{
      authentication: authentication,
-     options:options
+     upload_data: upload_data
     }
 });
 export default store;

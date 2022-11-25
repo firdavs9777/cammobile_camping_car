@@ -63,7 +63,7 @@ export default {
   },
   computed: {
     isLoggedIn() {
-      return this.$store.getters.isAuthenticated;    
+     return this.$store.getters.isAuthenticated; 
     },
   },
   methods: {
@@ -73,7 +73,6 @@ export default {
     logout() {
       this.$store.dispatch('logout');
       this.closeHandler();
-      this.$router.go();
       this.$router.replace('/login');
     },
   },

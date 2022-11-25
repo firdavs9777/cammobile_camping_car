@@ -1,11 +1,14 @@
 const path = require('path');
+const { resolve } = path ;
+
 module.exports = {
   configureWebpack: {
     resolve: {
       alias: {
-        '@'               : path.resolve (__dirname, 'src/') , 
-        '@components'     : path.resolve(__dirname, 'src/components/'),
-        '@pages'           :path.resolve(__dirname, 'src/components/pages/'),
+        '@'               : resolve(__dirname, 'src/') , 
+        '@assets'               : resolve(__dirname, 'src/components/assets/') , 
+        '@components'     : resolve(__dirname, 'src/components/'),
+        '@pages'          : resolve(__dirname, 'src/components/pages/'),
         // '@nav_process'    : path.join(__dirname, 'src/components/nav_process') , 
         // '@AccordionList'  : path.join(__dirname, 'src/components/nav_process/AccordionList') , 
         // '@common'         : path.join(__dirname, 'src/components/common') , 
