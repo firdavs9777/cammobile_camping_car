@@ -96,6 +96,7 @@ export default {
         return;
       }
       this.isLoading = true;
+    
       // Send http request
       try {
         await this.$store.dispatch("login", {
@@ -103,6 +104,7 @@ export default {
           pass: this.password,
         });
         this.$router.replace("/");
+        this.$router.go()
       } catch (err) {
         this.error = err.message || "Failed to authenticate ";
       }

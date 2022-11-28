@@ -22,7 +22,8 @@
             <img
               src="@components/assets/Vector.png"
               style="width: 49px; height: 49px"
-            />
+            /> 
+            
           </div>
           <button class="upload_button" type="button">Previus</button>
         </div>

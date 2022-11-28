@@ -9,7 +9,7 @@ $black: #000;
 $gray-0d: #0d0d0dd9;
 $dark: #242424 !default;
 $light: #f5f8fd;
-$white: #fff;
+$white: #f6f6f6;
 $dark-gray: #525462;
 $middle-gray: #808396;
 $light-gray: #e6e8f3;
@@ -56,6 +56,8 @@ $dim: rgba(
   $alpha: 0.2,
 );
 
+
+
 $color-material: #9D92C9;
 $color-process : #1F4B81;
 $color-analysis : #67A1E3;
@@ -85,6 +87,7 @@ $padding: 10px;
 @mixin label {
     padding-top: 10px; padding-bottom: 10px; font-size: 18px; display: block;
 }
+
 @mixin input_number {
     height: 30px;width: 100%; border-radius: 20px; border: 1px solid black; font-size: 18px; padding: 10px; margin-right: 10px;
 }

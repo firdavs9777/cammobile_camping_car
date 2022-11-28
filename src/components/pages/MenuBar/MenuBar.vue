@@ -2,51 +2,70 @@
   <div class="sidebar" :class="active">
     <div class="sidebar-panel">
       <div class="profile_main">
-      <img  v-if="isLoggedIn" src="../../assets/avatar.png" alt="Avatar" class="avatar" />
-      <ul>
-        <li v-if="!isLoggedIn" @click="closeHandler">
-          <router-link to="/register">Register</router-link>
-        </li>
-        <li v-if="!isLoggedIn" @click="closeHandler">
-          <router-link to="/login">Login</router-link>
-        </li>
-        <li v-if="isLoggedIn">
-          <button @click="logout">Logout </button>
-        </li>
-
-        <li @click="closeHandler">
+        <div class="profile_header">
+          <i class="ri-close-line" @click="closeHandler"></i>
+          <div>
+            <h1>안녕하세요</h1>
+            <p    v-if="isLoggedIn">Make Works 님</p>
+            <img
+              v-if="isLoggedIn"
+              src="../../assets/avatar.png"
+              alt="Avatar"
+              class="avatar"
+            />
+            <p v-if="!isLoggedIn" @click="closeHandler">
+            <router-link to="/login">
+              <h1>로그인 해주세요.</h1>
+            </router-link>
+            </p>
+          </div>
+        </div>
+        <div class="user_info">
+          <div class="user_info_section">
+            <h1 class="user_info_header">등록한캠핑카</h1>
+            <p class="user_info_paragraph">2 개</p>
+          </div>
+          <div class="user_info_section">
+            <h1 class="user_info_header">찜한목록</h1>
+            <p class="user_info_paragraph">6 개</p>
+          </div>
+          <div class="user_info_section">
+            <h1 class="user_info_header">최근본캠핑카</h1>
+            <p class="user_info_paragraph">6 개</p>
+          </div>
+        </div>
+        <ul>
+          <li @click="closeHandler">
+            <i class="ri-user-line"></i>
             <router-link to="/myprofile"> 마이 페이지 </router-link>
           </li>
-          <hr class="line" />
           <li @click="closeHandler">
-            <router-link to="/solditems"> 판매 내역 </router-link>
+            <i class="ri-caravan-fill"></i>
+            <router-link to="/solditems"> 내가 등록한 캠핑카 </router-link>
           </li>
-          <hr class="line" />
-
           <li @click="closeHandler">
-            <router-link to="/purchasedproducts"> 구매 내역 </router-link>
-          </li>
-
-          <hr class="line" />
-          <li @click="closeHandler">
+            <i class="ri-heart-line"></i>
             <router-link to="/wishlist"> 찜 내역 </router-link>
           </li>
-          <hr class="line" />
           <li @click="closeHandler">
+            <i class="ri-caravan-fill"></i>
             <router-link to="/recentviews"> 최근 본 내역 </router-link>
           </li>
-          <hr class="line" />
           <li @click="closeHandler">
+            <i class="ri-customer-service-line"></i>
             <router-link to="/customerservice"> 고객 센터 </router-link>
           </li>
-      </ul>
+        </ul>
+      </div>
+      <div v-if="isLoggedIn" class="logout">
+        <i class="ri-logout-box-r-line"></i>
+        <button @click="logout">로그아웃</button>
       </div>
     </div>
   </div>
 </template>
 <script>
 export default {
-  
   props: {
     menubarOpenBln: Boolean,
     closeHandler: Function,
@@ -54,7 +73,7 @@ export default {
   data: () => ({
     isPanelOpen: true,
     active: null,
-    isLogout:false,
+    isLogout: false,
   }),
   watch: {
     menubarOpenBln() {
@@ -63,7 +82,7 @@ export default {
   },
   computed: {
     isLoggedIn() {
-     return this.$store.getters.isAuthenticated; 
+      return this.$store.getters.isAuthenticated;
     },
   },
   methods: {
@@ -71,9 +90,10 @@ export default {
       this.isPanelOpen = false;
     },
     logout() {
-      this.$store.dispatch('logout');
+      this.$store.dispatch("logout");
+      this.$router.go();
       this.closeHandler();
-      this.$router.replace('/login');
+      this.$router.replace("/login");
     },
   },
   mounted: () => {
@@ -120,6 +140,7 @@ export default {
   transform: translateX(0%);
 }
 .sidebar-panel {
+  justify-content: left;
   overflow-y: auto;
   /* background-color: #aaa7c9; */
   /* position: fixed; */
@@ -128,7 +149,7 @@ export default {
   top: 0;
   height: 100vh;
   z-index: 999;
-  width: 80%;
+  width: 85%;
   transition: all 0.2s ease 0.1s;
   background: #fff;
   color: #333;
@@ -138,8 +159,7 @@ export default {
 }
 .profile_main {
   height: auto;
-  display: flex-box;
-  flex-direction: row;
+  justify-content: left;
 }
 .profile {
   margin-top: 10px;
@@ -164,8 +184,7 @@ export default {
   justify-self: end;
   font-size: 20px;
 }
-.login_first
-{
+.login_first {
   font-size: 16px;
   padding: 10px;
   margin: auto;
@@ -189,29 +208,42 @@ export default {
   margin-bottom: 10px;
 }
 .logout {
-  border: 1px solid #333;
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+  margin: 20px;
   font-size: 18px;
   border-radius: 10px;
-  background-color: #a0a30a;
-  color: #fff;
+  color: #333;
   height: 50px;
   width: 150px;
   margin-left: 10px;
   margin-right: 10px;
 }
+.logout i {
+  padding: 10px;
+  margin: 10px;
+}
 ul {
+  width: 100%;
   height: 100%;
   background-color: #ffff;
 }
 ul li {
-  height: 60px;
+  margin-left: 30px;
+  margin-right: 20px;
   padding-top: 10px;
-  margin-bottom: 15px;
-  text-align: center;
+  margin-bottom: 20px;
+  text-align: left;
+  justify-content: left;
   color: #333;
   font-size: 20px;
   list-style: none;
   text-decoration: none;
+}
+ul li i 
+{
+  padding-left: 20px;
 }
 a {
   color: #333;
@@ -222,8 +254,7 @@ a:active,
 a:hover,
 a.router-link-active {
   border-bottom: 1px solid yellow;
-  color: #a0a30a;
-  font-size: 20px;
+  text-decoration: underline;  
   cursor: pointer;
 }
 .line {
@@ -234,5 +265,48 @@ a.router-link-active {
 .ri-close-line {
   font-size: 24px;
   text-align: end;
+}
+.user_info {
+  display: flex;
+}
+.user_info_section {
+  margin: 10px;
+  padding: 10px;
+}
+.user_info_header {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 350;
+  font-size: 15px;
+  line-height: 20px;
+
+  text-align: center;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: #222222;
+  flex: none;
+}
+.user_info_paragraph {
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 43px;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: #3c70bf;
+}
+.profile_header {
+  display: flex;
+  justify-content: space-between;
+  padding: 33px 20px;
+  width: 358px;
+  background: #16abff;
+  border-radius: 0px 20px 0px 0px;
+}
+.profile_header i 
+{
+  color: #fff;
+  font-size: 22px;
 }
 </style>

@@ -3,22 +3,15 @@
     <div class="icon-main">
       <i class="ri-menu-line" @click="menuTogglefunc"> </i>
       <h1 style="">
-        <router-link to="/" class="heading">CAMMOBILE </router-link>
+        <router-link to="/" class="heading">
+          <img alt="alt message" class="your-logo-css-class"
+          src="@assets/logo_white.svg">  
+        </router-link>
       </h1>
     </div>
     <div class="icons-bar" v-if="isLogin">
       <ul>
-        <!-- <li  v-if="isLoggedIn">
-          <br>
-          <router-link to="/notification">
-            <i class="ri-notification-line">
-            </i> <span style="color:black;">+10</span>
-            <br>
-            Notifications
-          </router-link>
-        </li> -->
-
-        <li v-if="isLoggedIn">
+        <li>
           <br />
           <router-link to="/myprofile">
             <i class="ri-user-line"></i>
@@ -63,7 +56,8 @@ header {
 }
 
 .icon-main {
-  width: 50px;
+  justify-content: left;
+
 }
 .icon-main h1 a {
   text-decoration: none;
@@ -135,8 +129,7 @@ h1 {
   padding-bottom: 10px;
 }
 .heading {
-  margin: auto;
-  padding-right: 20px;
+    margin-left: 20px;
 }
 
 .logo:hover,
