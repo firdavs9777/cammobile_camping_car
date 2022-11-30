@@ -74,11 +74,11 @@
       <div class="banner">
         <banner></banner>
       </div>
-      <div class="plus">
+      <!-- <div class="plus">
         <button class="compare" @click.stop.prevent="upload_page()">
         <i class="ri-add-line"></i>
       </button>
-      </div>
+      </div> -->
       <div>
         <Footer></Footer>
       </div>

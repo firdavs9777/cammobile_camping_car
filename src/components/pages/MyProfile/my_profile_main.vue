@@ -1,10 +1,10 @@
 <template>
   <div class="my-profile">
-    <div style="display: flex; margin: 10px">
-      <router-link to="" style="margin-top: 10px; width: 50%">
+    <div class="main_page">
+      <router-link to="" class="section_motorhome">
         <button class="motorhome_button">MY 모터홈</button>
       </router-link>
-      <router-link to="myTrailer" style="margin-top: 10px; width: 50%">
+      <router-link to="myTrailer" class="section_trailer">
         <button class="motorhome_button">MY 모터홈</button>
       </router-link>
     </div>
@@ -12,7 +12,7 @@
       <h1 class="heading">등록된 차량이 없습니다.</h1>
       <p class="paragraph">내 차 판매하기 버튼을 눌러 차량을 판매해 보세요.</p>
     </section>
-    <button class="sell_button">내 차 판매하기</button>
+    <button class="sell_button" @click="upload_page">내 차 판매하기</button>
   </div>
 </template>
 <script>
@@ -26,7 +26,9 @@ export default {
   mounted() { },
   beforeUpdate() { },
   updated() { },
-  beforeDestroy() { },
+  beforeDestroy(){
+    
+  },
   destroyed() { },
   methods: {
     upload_page() {
@@ -40,8 +42,21 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.main_page 
+{
+  display: flex; 
+ 
+}
+.section_motorhome 
+{
+  margin-top: 10px; width: 50%;
+}
+.section_trailer
+{
+  margin-top: 10px; width: 50%;
+}
 .my-profile {
-
+   height: 100vh;
   background-color: #F0F4F7;
 
   .user_info {
@@ -209,8 +224,7 @@ export default {
     padding: 5px 0px;
     width: 196px;
     height: 45px;
-    left: 116px;
-    top: 835px;
+    text-align: center;
     background: #16ABFF;
     border-radius: 50px;
     font-family: 'Noto Sans KR';

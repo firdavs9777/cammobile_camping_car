@@ -1,10 +1,10 @@
 <template>
   <div class="trailer">
-    <div style="display: flex; margin: 10px">
-      <router-link to="myprofile" style="margin-top: 10px; width: 50%">
+    <div class="main_page">
+      <router-link to="myprofile" class="section_motorhome">
         <button class="motorhome_button">MY 모터홈</button>
       </router-link>
-      <router-link to="myTrailer" style="margin-top: 10px; width: 50%">
+      <router-link to="myTrailer" class="section_trailer">
         <button class="motorhome_button">MY 모터홈</button>
       </router-link>
     </div>
@@ -16,13 +16,24 @@
       </p>
       <div class="price_section" >
         <h1>4,990 만원</h1>
-        <img src="@assets/edit_button.png" style="height:40px;width:40px;"/>
+        <img src="@assets/edit_button.png" style="height:40px;width:40px;"  @click="showEditSection"/>
       </div>
     </div>
+    <div v-if="isPanelBottom" class="panelBottom">
+      <i class="ri-close-line" @click="showEditSection"></i>
+        <button class="edit">수정하기</button>
+        <hr/>
+        <button class="hide">숨기하기</button>
+        <hr/>
+        <button class="delete">삭체하기</button>
+      </div>
   </div>
 </template>
 <script>
 export default {
+  data:()=>({
+    isPanelBottom: false
+  }),
   methods: {
     upload_trailer() {
       this.$router.push("upload_trailer");
@@ -31,11 +42,65 @@ export default {
     edit_trailer() {
       this.$router.push("edit_trailer");
     },
+    showEditSection(){
+      this.isPanelBottom = !this.isPanelBottom;
+    }
   },
 };
 </script>
-
 <style scoped>
+.panelBottom
+{
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+   background-color: #ffffff;
+  width: 100%;
+  height: 291px;
+}
+.panelBottom i 
+{
+  color: #333;
+  margin: 10px;
+  padding: 10px;
+  float: right;
+  font-size:22px;
+}
+.edit 
+{
+  cursor: pointer;
+  color:#333;
+  text-align: left;
+  width: 100%;
+  text-align: center;
+}
+.hide 
+{
+  color:#333;
+  text-align: left;
+  width: 100%;
+  text-align: center;
+}
+.delete 
+{
+  color:#333;
+  text-align: left;
+  width: 100%;
+  text-align: center;
+}
+.main_page 
+{
+  display: flex; 
+ 
+}
+.section_motorhome 
+{
+  margin-top: 10px; width: 50%;
+}
+.section_trailer
+{
+  margin-top: 10px; width: 50%;
+}
 section {
   text-align: left;
 }
@@ -73,6 +138,7 @@ a.router-link-active {
 }
 
 .trailer {
+  height: 100vh;
   background-color: #f0f4f7;
   cursor: pointer;
   pointer-events: visible;

@@ -208,17 +208,19 @@ export default {
   margin-bottom: 10px;
 }
 .logout {
+  border-top: 1px solid black;
   position: absolute;
   bottom: 0;
-  padding: 10px;
+  padding: 30px;
   margin: 20px;
   font-size: 18px;
-  border-radius: 10px;
   color: #333;
   height: 50px;
-  width: 150px;
+  width: 100%;
   margin-left: 10px;
   margin-right: 10px;
+  justify-content: center;
+  text-align: center;
 }
 .logout i {
   padding: 10px;
